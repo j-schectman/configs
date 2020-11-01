@@ -31,6 +31,8 @@ set autoindent
 set tabstop=2
 set expandtab
 set shiftwidth=2
+imap ii <Esc>
+
 autocmd Filetype markdown setlocal keymap=dvorak
 
 
