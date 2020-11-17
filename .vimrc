@@ -34,6 +34,8 @@ set expandtab
 set shiftwidth=2
 imap ii <Esc>
 
+autocmd BufRead,BufNewFile *.md setlocal spell
+
 if $TERM == "xterm-256color"
     set t_Co=256
 endif
