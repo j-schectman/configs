@@ -11,9 +11,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
-Plugin 'jreybert/vimagit'
 Plugin 'tpope/vim-surround'
 Plugin 'vimwiki/vimwiki'
+Plugin 'kovisoft/slimv'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 
 call vundle#end()            " required
 
@@ -32,7 +35,11 @@ set autoindent
 set tabstop=2
 set expandtab
 set shiftwidth=2
+set hidden
 imap ii <Esc>
+
+nnoremap <leader>gt :bn <CR>
+nnoremap <leader>gT :bp <CR>
 
 autocmd BufRead,BufNewFile *.md setlocal spell
 
@@ -46,9 +53,14 @@ colorscheme elflord
 "
 " Vimwiki
 let g:vimwiki_ext = '.md' " set extension to .md
-let g:vimwiki_global_ext = 0 " make sure vimwiki doesn't own all .md files
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : ''}]
 
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
+
+" goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+let g:limelight_conceal_ctermfg = 'grey' 
