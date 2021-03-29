@@ -15,6 +15,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kovisoft/slimv'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'nanotech/jellybeans.vim'
 
 Plugin 'neoclide/coc.nvim'
 Plugin 'MaxMEllon/vim-jsx-pretty'
@@ -58,7 +59,7 @@ if $TERM == "xterm-256color"
     set t_Co=256
 endif
 
-colorscheme elflord
+colorscheme jellybeans
 
 " Plugin Specific
 "
