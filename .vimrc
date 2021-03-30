@@ -9,13 +9,13 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kovisoft/slimv'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'tpope/vim-fugitive'
 
 Plugin 'neoclide/coc.nvim'
 Plugin 'MaxMEllon/vim-jsx-pretty'
