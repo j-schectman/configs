@@ -48,6 +48,8 @@ set hidden
 set wildignore=**/node_modules/**,**node_modules/,/node_modules/**
 imap ii <Esc>
 
+set diffopt+=vertical
+
 nnoremap <leader>gt :bn <CR>
 nnoremap <leader>gT :bp <CR>
 nnoremap <leader>ve :e $MYVIMRC <CR>
