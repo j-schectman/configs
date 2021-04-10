@@ -14,8 +14,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kovisoft/slimv'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'nanotech/jellybeans.vim'
 Plugin 'tpope/vim-fugitive'
+
 
 Plugin 'neoclide/coc.nvim'
 Plugin 'MaxMEllon/vim-jsx-pretty'
@@ -24,8 +24,11 @@ Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'vimwiki/vimwiki'
-Plugin 'reedes/vim-pencil'
-Plugin 'dbmrq/vim-ditto'
+
+" Colorschemes
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'connorholyday/vim-snazzy'
+Plugin 'axvr/photon.vim'
 
 call vundle#end()            " required
 
@@ -61,7 +64,7 @@ if $TERM == "xterm-256color"
     set t_Co=256
 endif
 
-colorscheme jellybeans
+colorscheme snazzy
 
 " Plugin Specific
 "
@@ -97,19 +100,6 @@ nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
-
-"ditto
-
-" Use autocmds to check your text automatically and keep the highlighting
-" up to date (easier):
-au FileType markdown,text,tex DittoOn  " Turn on Ditto's autocmds
-nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
-nmap =d <Plug>DittoNext                " Jump to the next word
-nmap -d <Plug>DittoPrev                " Jump to the previous word
-nmap +d <Plug>DittoGood                " Ignore the word under the cursor
-nmap _d <Plug>DittoBad                 " Stop ignoring the word under the cursor
-nmap ]d <Plug>DittoMore                " Show the next matches
-nmap [d <Plug>DittoLess                " Show the previous matches
 
 " goyo
 autocmd! User GoyoEnter Limelight
