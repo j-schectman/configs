@@ -103,11 +103,3 @@ let g:airline#extensions#tabline#fnamemod=':t'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 let g:limelight_conceal_ctermfg = 'grey' 
-
-" Global
-
-autocmd BufRead,BufNewFile *.md setlocal spell
-
-let g:netrw_use_errorwindow = 1
-
-colorscheme jellybeans
