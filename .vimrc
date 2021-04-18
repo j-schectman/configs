@@ -9,12 +9,20 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+" Themes
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'ciaranm/inkpot'
+Plugin 'connorholyday/vim-snazzy'
+Plugin 'axvr/photon.vim'
+
+" Productivity
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kovisoft/slimv'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'nanotech/jellybeans.vim'
 Plugin 'tpope/vim-fugitive'
 
 Plugin 'neoclide/coc.nvim'
@@ -24,8 +32,6 @@ Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'vimwiki/vimwiki'
-Plugin 'reedes/vim-pencil'
-Plugin 'dbmrq/vim-ditto'
 
 call vundle#end()            " required
 
@@ -52,16 +58,11 @@ set diffopt+=vertical
 
 nnoremap <leader>gt :bn <CR>
 nnoremap <leader>gT :bp <CR>
+nnoremap <leader>bd :bd <CR>
 nnoremap <leader>ve :e $MYVIMRC <CR>
 nnoremap <leader>vs :source $MYVIMRC <CR>
 
-autocmd BufRead,BufNewFile *.md setlocal spell
 
-if $TERM == "xterm-256color"
-    set t_Co=256
-endif
-
-colorscheme jellybeans
 
 " Plugin Specific
 "
@@ -98,20 +99,15 @@ nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
 
-"ditto
-
-" Use autocmds to check your text automatically and keep the highlighting
-" up to date (easier):
-au FileType markdown,text,tex DittoOn  " Turn on Ditto's autocmds
-nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
-nmap =d <Plug>DittoNext                " Jump to the next word
-nmap -d <Plug>DittoPrev                " Jump to the previous word
-nmap +d <Plug>DittoGood                " Ignore the word under the cursor
-nmap _d <Plug>DittoBad                 " Stop ignoring the word under the cursor
-nmap ]d <Plug>DittoMore                " Show the next matches
-nmap [d <Plug>DittoLess                " Show the previous matches
-
 " goyo
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 let g:limelight_conceal_ctermfg = 'grey' 
+
+" Global
+
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+let g:netrw_use_errorwindow = 1
+
+colorscheme jellybeans
