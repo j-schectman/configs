@@ -62,7 +62,7 @@ nnoremap <leader>bd :bd <CR>
 nnoremap <leader>ve :e $MYVIMRC <CR>
 nnoremap <leader>vs :source $MYVIMRC <CR>
 
-command! -nargs=1 Scratchlisp :tabe <args>.lisp scl
+command -nargs=1 Scratchlisp :tabe <args>.lisp
 
 
 " Plugin Specific
