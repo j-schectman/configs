@@ -9,13 +9,21 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+" Themes
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'ciaranm/inkpot'
+Plugin 'connorholyday/vim-snazzy'
+Plugin 'axvr/photon.vim'
+
+" Productivity
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kovisoft/slimv'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-
 
 Plugin 'neoclide/coc.nvim'
 Plugin 'MaxMEllon/vim-jsx-pretty'
@@ -24,11 +32,6 @@ Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'vimwiki/vimwiki'
-
-" Colorschemes
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'connorholyday/vim-snazzy'
-Plugin 'axvr/photon.vim'
 
 call vundle#end()            " required
 
@@ -55,18 +58,12 @@ set diffopt+=vertical
 
 nnoremap <leader>gt :bn <CR>
 nnoremap <leader>gT :bp <CR>
+nnoremap <leader>bd :bd <CR>
 nnoremap <leader>ve :e $MYVIMRC <CR>
 nnoremap <leader>vs :source $MYVIMRC <CR>
 
 command! -nargs=1 Scratchlisp :tabe <args>.lisp scl
 
-autocmd BufRead,BufNewFile *.md setlocal spell
-
-if $TERM == "xterm-256color"
-    set t_Co=256
-endif
-
-colorscheme snazzy
 
 " Plugin Specific
 "
@@ -107,3 +104,11 @@ let g:airline#extensions#tabline#fnamemod=':t'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 let g:limelight_conceal_ctermfg = 'grey' 
+
+" Global
+
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+let g:netrw_use_errorwindow = 1
+
+colorscheme jellybeans
