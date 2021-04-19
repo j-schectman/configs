@@ -58,6 +58,8 @@ nnoremap <leader>gT :bp <CR>
 nnoremap <leader>ve :e $MYVIMRC <CR>
 nnoremap <leader>vs :source $MYVIMRC <CR>
 
+command! -nargs=1 Scratchlisp :tabe <args>.lisp scl
+
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 if $TERM == "xterm-256color"
