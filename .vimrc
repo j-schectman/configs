@@ -16,6 +16,7 @@ Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'ciaranm/inkpot'
 Plugin 'connorholyday/vim-snazzy'
 Plugin 'axvr/photon.vim'
+Plugin 'NLKNguyen/papercolor-theme'
 
 " Productivity
 Plugin 'vim-airline/vim-airline'
@@ -54,6 +55,8 @@ set hidden
 set wildignore=**/node_modules/**,**node_modules/,/node_modules/**
 imap ii <Esc>
 
+colorscheme PaperColor
+set background=dark
 set diffopt+=vertical
 
 nnoremap <leader>gt :bn <CR>
@@ -82,20 +85,9 @@ nmap <silent> gr <Plug>(coc-references)
 
 nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>l :<C-u>CocDiagnostics <cr>
 " Show commands.
 nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
-
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
