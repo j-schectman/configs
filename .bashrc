@@ -1,2 +1,2 @@
 export TERM=xterm-256color
-alias rune='ruby -n -e'
+setxkbmap -layout us -option ctrl:swapcaps
