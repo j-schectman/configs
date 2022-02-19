@@ -23,9 +23,10 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kovisoft/slimv'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
 
+Plugin 'tpope/vim-fugitive'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 Plugin 'neoclide/coc.nvim'
 Plugin 'MaxMEllon/vim-jsx-pretty'
 
@@ -88,6 +89,9 @@ nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <leader>l :<C-u>CocDiagnostics <cr>
 " Show commands.
 nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <C-p> :GFiles <cr>
+nnoremap <silent><nowait> <C-P> :Files <cr>
+nnoremap <silent><nowait> <C-l> :Buffers <cr>
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
