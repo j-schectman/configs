@@ -27,12 +27,10 @@ Plugin 'kovisoft/slimv'
 Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'neoclide/coc.nvim'
+Plugin 'dense-analysis/ale'
 Plugin 'MaxMEllon/vim-jsx-pretty'
 
 " Writing plugins
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
 Plugin 'vimwiki/vimwiki'
 
 call vundle#end()            " required
@@ -53,21 +51,18 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set hidden
-set wildignore=**/node_modules/**,**node_modules/,/node_modules/**
-imap ii <Esc>
 
 colorscheme PaperColor
 set background=dark
 set diffopt+=vertical
 
-nnoremap <leader>gt :bn <CR>
-nnoremap <leader>gT :bp <CR>
+nnoremap gt :bn <CR>
+nnoremap gT :bp <CR>
+nnoremap <leader>gt :tabn <CR>
+nnoremap <leader>gT :tabp <CR>
 nnoremap <leader>bd :bd <CR>
 nnoremap <leader>ve :e $MYVIMRC <CR>
 nnoremap <leader>vs :source $MYVIMRC <CR>
-
-command -nargs=1 Scratchlisp :tabe <args>.lisp
-
 
 " Plugin Specific
 "
@@ -77,26 +72,15 @@ let g:vimwiki_global_ext = 0 " make sure it doesn't think it owns the world
 
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : ''}]
 
-" CoC
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <leader>l :<C-u>CocDiagnostics <cr>
-" Show commands.
-nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
+" FZF
 nnoremap <silent><nowait> <C-p> :GFiles <cr>
 nnoremap <silent><nowait> <C-P> :Files <cr>
 nnoremap <silent><nowait> <C-l> :Buffers <cr>
+
+" ALE
+nnoremap <silent> gd :ALEGoToDefinition<cr>
+nnoremap <silent> gr :ALEFindReferences -relative<Return>
+
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
-
-" goyo
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-let g:limelight_conceal_ctermfg = 'grey' 
