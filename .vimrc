@@ -10,16 +10,12 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Themes
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'dracula/vim', { 'name': 'dracula' }
+" Themes, be sure to validate treesitter support
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'cseelus/vim-colors-lucid'
 Plugin 'sonph/onehalf', { 'rtp': 'vim' }
 Plugin 'nvim-treesitter/nvim-treesitter'
-Plugin 'williamboman/mason.nvim'
-Plugin 'williamboman/mason-lspconfig.nvim'
-Plugin 'neovim/nvim-lspconfig'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Productivity
 Plugin 'vim-airline/vim-airline'
@@ -28,10 +24,19 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-dadbod'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-rhubarb'
+Plugin 'kristijanhusak/vim-dadbod-ui'
+Plugin 'williamboman/mason.nvim'
+Plugin 'williamboman/mason-lspconfig.nvim'
+Plugin 'neovim/nvim-lspconfig'
 
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+" Plugin 'junegunn/fzf'
+" Plugin 'junegunn/fzf.vim'
 " Plugin 'neoclide/coc.nvim'
+Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'github/copilot.vim'
 Plugin 'hrsh7th/nvim-cmp'
 Plugin 'hrsh7th/cmp-nvim-lsp'
@@ -39,11 +44,14 @@ Plugin 'hrsh7th/cmp-buffer'
 Plugin 'hrsh7th/cmp-path'
 Plugin 'hrsh7th/cmp-cmdline'
 Plugin 'vim-test/vim-test'
+Plugin 'pwntester/octo.nvim'
+Plugin 'nvim-tree/nvim-web-devicons'
+Plugin 'nvim-lua/plenary.nvim'
 
 " Writing plugins
 Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
+" Plugin 'junegunn/limelight.vim'
 Plugin 'vim-pandoc/vim-pandoc'
 
 call vundle#end()            " required
@@ -65,7 +73,7 @@ set expandtab
 set shiftwidth=2
 set hidden
 
-set background=dark
+set background=light
 set diffopt+=vertical
 
 nnoremap gt :bn <CR>
@@ -83,14 +91,25 @@ let g:vimwiki_ext = '.md' " set extension to .md
 let g:vimwiki_global_ext = 0 " make sure it doesn't think it owns the world
 
 let g:vimwiki_list = [
-      \ {'path': '~/Dropbox/workwiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : ''},
-      \ {'path': '~/Dropbox/personalwiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : ''}
+      \ {'path': '/Users/jonschectman/Library/CloudStorage/GoogleDrive-mralienmold@gmail.com/My Drive/vimwiki', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : ''},
       \ ]
+" No italics in terminal :sadface:
+hi! link VimwikiItalic VimwikiBold
+
+" test-vim
+let test#strategy = "neovim_sticky"
+let test#neovim#term_position = "vert"
+
+nnoremap <leader>tn :TestNearest<CR>
+nnoremap <leader>tf :TestFile<CR>
+nnoremap <leader>tl :TestLast<CR>
+nnoremap <leader>tt :TestLast<CR>
+
 
 " FZF
-nnoremap <silent><nowait> <C-p> :GFiles <cr>
-nnoremap <silent><nowait> <C-P> :Files <cr>
-nnoremap <silent><nowait> <C-l> :Buffers <cr>
+" nnoremap <silent><nowait> <C-p> :GFiles <cr>
+" nnoremap <silent><nowait> <C-P> :Files <cr>
+" nnoremap <silent><nowait> <C-l> :Buffers <cr>
 
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
@@ -101,12 +120,12 @@ let g:go_fmt_autosave = 1
 "goyo
 function! s:goyo_enter()
    set linebreak
-   Limelight
+   " Limelight
 endfunction
 
 function! s:goyo_leave()
    set linebreak!
-   Limelight!
+   " Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -115,13 +134,9 @@ nnoremap <silent><nowait> <leader>1  :<C-u>Goyo <cr>
 
 "fugitive
 
-nnoremap <leader>gg :Ggrep<Space>
-nnoremap <leader>gw :Ggrep<Space><C-R><C-W>
-" inoremap <C-g> <Esc>
-" nnoremap <C-g> <Esc>
-" vnoremap <C-g> <Esc>
-" cnoremap <C-g> <Esc>
- 
+" nnoremap <leader>gg :Ggrep<Space>
+" nnoremap <leader>gw :Ggrep<Space><C-R><C-W>
+
 " use mason
 
 lua << EOF
@@ -129,6 +144,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false
+  },
+  incremental_selection = {
+        enable = true,
   }
 }
 
@@ -194,7 +212,72 @@ vim.api.nvim_create_autocmd('LspAttach', {
      { name = 'buffer' },
    })
   })
+
+ require('telescope').setup{
+   -- ...
+   pickers={
+    diagnostics = {
+      bufnr = 0,
+      sort_by = 'severity',
+      severit_limit = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN }),
+      no_unlisted = true,
+    },
+   }
+
+ }
+ local builtin = require('telescope.builtin')
+
+ vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+ vim.keymap.set('n', '<C-P>', builtin.find_files, {})
+ vim.keymap.set('n', '<C-l>', builtin.buffers, {})
+ vim.keymap.set('n', '<C-h>', builtin.diagnostics, {})
+ vim.keymap.set('n', '<C-s>', builtin.live_grep, {})
+ vim.keymap.set('n', '<leader>gg', builtin.grep_string, {})
+ require"octo".setup{}
+
+ local result = vim.fn.systemlist("npm ls -g --depth=0")
+ local location = string.format("%s/node_modules/@vue/typescript-plugin", result[1])
+
+ -- if using mason, uncomment lines below once mason starts exporting vue-language-server
+ -- local is_mason = pcall(require, "mason")
+ -- location = is_mason and vim.fn.stdpath("data") .. "/mason/packages/vue-language-server/node_modules/@vue/typescript-plugin"
+
+ if vim.fn.isdirectory(location) == 1 then
+   -- Ensure @vue/typescript-plugin is installed
+   -- before setting up tsserver
+   require("lspconfig").tsserver.setup({
+   -- on_attach = on_attach,
+   -- capabilities = capabilities,
+   root_dir = require("lspconfig.util").root_pattern("src/App.vue", "nuxt.config.ts", "nuxt.config.js"),
+   filetypes = { "vue", "typescript", "javascript", "json" },
+   init_options = {
+     plugins = {
+       {
+           name = "@vue/typescript-plugin",
+           location = location,
+           languages = { "vue" },
+       },
+     },
+   },
+   })
+ else
+   vim.api.nvim_err_writeln("@vue/typescript-plugin is required, install globally via `npm install -g @vue/typescript-plugin`")
+   end
 EOF
+
+augroup MyFormatAutogroup
+  autocmd!
+  autocmd BufWritePre *.go lua vim.lsp.buf.format()
+  autocmd BufWritePre *.vue :EslintFixAll
+  autocmd BufWritePre *.js :EslintFixAll
+  autocmd BufWritePre *.ts :EslintFixAll
+augroup end
+
+let g:netrw_fastbrowse = 0
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevelstart=99
 
 set termguicolors
 let g:copilot_filetypes = {
@@ -202,10 +285,23 @@ let g:copilot_filetypes = {
       \ 'vimwiki': v:false,
       \ }
 " copilot mapping
+" allow escape to be... escape
 imap <silent><script><expr> <C-\> copilot#Accept("\<CR>")
 " imap <silent><script><expr> <C-]> copilot#Next()
 " imap <silent><script><expr> <C-[> copilot#Previous()
 inoremap <Nul> <C-x><C-o> 
+let g:dbs = {
+\  'dev': 'postgresql://postgres:postgres@localhost:9700/scratchpad_development'
+\ }
 
 set timeoutlen=700 ttimeoutlen=0
-colorscheme onehalflight
+colorscheme catppuccin-latte
+
+:set splitright
+let g:airline_theme='catppuccin'
+
+" external
+
+nnoremap <leader>ss :! task add 
+nnoremap <leader>si :! task add +in 
+nnoremap <leader>sl :! task next<CR>
