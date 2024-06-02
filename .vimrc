@@ -14,8 +14,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'cseelus/vim-colors-lucid'
 Plugin 'sonph/onehalf', { 'rtp': 'vim' }
-Plugin 'nvim-treesitter/nvim-treesitter'
+Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " Productivity
 Plugin 'vim-airline/vim-airline'
@@ -44,7 +45,6 @@ Plugin 'hrsh7th/cmp-buffer'
 Plugin 'hrsh7th/cmp-path'
 Plugin 'hrsh7th/cmp-cmdline'
 Plugin 'vim-test/vim-test'
-Plugin 'pwntester/octo.nvim'
 Plugin 'nvim-tree/nvim-web-devicons'
 Plugin 'nvim-lua/plenary.nvim'
 
@@ -89,9 +89,10 @@ nnoremap <leader>vs :source $MYVIMRC <CR>
 " Vimwiki
 let g:vimwiki_ext = '.md' " set extension to .md
 let g:vimwiki_global_ext = 0 " make sure it doesn't think it owns the world
+let g:vimwiki_markdown_link_ext=1
 
 let g:vimwiki_list = [
-      \ {'path': '/Users/jonschectman/Library/CloudStorage/GoogleDrive-mralienmold@gmail.com/My Drive/vimwiki', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : ''},
+      \ {'path': '/Users/ji/git/vimwiki', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : '', 'links_space_char': '_'},
       \ ]
 " No italics in terminal :sadface:
 hi! link VimwikiItalic VimwikiBold
@@ -233,45 +234,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
  vim.keymap.set('n', '<C-h>', builtin.diagnostics, {})
  vim.keymap.set('n', '<C-s>', builtin.live_grep, {})
  vim.keymap.set('n', '<leader>gg', builtin.grep_string, {})
- require"octo".setup{}
-
- local result = vim.fn.systemlist("npm ls -g --depth=0")
- local location = string.format("%s/node_modules/@vue/typescript-plugin", result[1])
-
- -- if using mason, uncomment lines below once mason starts exporting vue-language-server
- -- local is_mason = pcall(require, "mason")
- -- location = is_mason and vim.fn.stdpath("data") .. "/mason/packages/vue-language-server/node_modules/@vue/typescript-plugin"
-
- if vim.fn.isdirectory(location) == 1 then
-   -- Ensure @vue/typescript-plugin is installed
-   -- before setting up tsserver
-   require("lspconfig").tsserver.setup({
-   -- on_attach = on_attach,
-   -- capabilities = capabilities,
-   root_dir = require("lspconfig.util").root_pattern("src/App.vue", "nuxt.config.ts", "nuxt.config.js"),
-   filetypes = { "vue", "typescript", "javascript", "json" },
-   init_options = {
-     plugins = {
-       {
-           name = "@vue/typescript-plugin",
-           location = location,
-           languages = { "vue" },
-       },
-     },
-   },
-   })
- else
-   vim.api.nvim_err_writeln("@vue/typescript-plugin is required, install globally via `npm install -g @vue/typescript-plugin`")
-   end
 EOF
 
-augroup MyFormatAutogroup
-  autocmd!
-  autocmd BufWritePre *.go lua vim.lsp.buf.format()
-  autocmd BufWritePre *.vue :EslintFixAll
-  autocmd BufWritePre *.js :EslintFixAll
-  autocmd BufWritePre *.ts :EslintFixAll
-augroup end
+" augroup MyFormatAutogroup
+"   autocmd!
+"   autocmd BufWritePre *.go lua vim.lsp.buf.format()
+"   autocmd BufWritePre *.vue :EslintFixAll
+"   autocmd BufWritePre *.js :EslintFixAll
+"   autocmd BufWritePre *.ts :EslintFixAll
+" augroup end
 
 let g:netrw_fastbrowse = 0
 
@@ -295,10 +266,10 @@ let g:dbs = {
 \ }
 
 set timeoutlen=700 ttimeoutlen=0
-colorscheme catppuccin-latte
+colorscheme catppuccin_latte
 
 :set splitright
-let g:airline_theme='catppuccin'
+let g:airline_theme='catppuccin_latte'
 
 " external
 
