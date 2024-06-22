@@ -14,9 +14,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'cseelus/vim-colors-lucid'
 Plugin 'sonph/onehalf', { 'rtp': 'vim' }
-Plugin 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plugin 'nvim-treesitter/nvim-treesitter'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " Productivity
 Plugin 'vim-airline/vim-airline'
@@ -45,6 +44,7 @@ Plugin 'hrsh7th/cmp-buffer'
 Plugin 'hrsh7th/cmp-path'
 Plugin 'hrsh7th/cmp-cmdline'
 Plugin 'vim-test/vim-test'
+Plugin 'pwntester/octo.nvim'
 Plugin 'nvim-tree/nvim-web-devicons'
 Plugin 'nvim-lua/plenary.nvim'
 
@@ -90,10 +90,18 @@ nnoremap <leader>vs :source $MYVIMRC <CR>
 let g:vimwiki_ext = '.md' " set extension to .md
 let g:vimwiki_global_ext = 0 " make sure it doesn't think it owns the world
 let g:vimwiki_markdown_link_ext=1
+let g:vimwiki_folding = 'expr'
+let g:vimwiki_tag_format = {'pre_mark': '@@', 'post_mark': '', 'sep': ''}
 
-let g:vimwiki_list = [
-      \ {'path': '/Users/ji/git/vimwiki', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path' : '', 'links_space_char': '_'},
-      \ ]
+let g:vimwiki_list = [{
+      \   'path': '/Users/jonaustin/git/vimwiki',
+      \   'syntax': 'markdown',
+      \   'ext': '.md',
+      \   'diary_rel_path' : '',
+      \   'links_space_char': '_',
+      \   'auto_tags': 1
+      \ }]
+
 " No italics in terminal :sadface:
 hi! link VimwikiItalic VimwikiBold
 
@@ -234,15 +242,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
  vim.keymap.set('n', '<C-h>', builtin.diagnostics, {})
  vim.keymap.set('n', '<C-s>', builtin.live_grep, {})
  vim.keymap.set('n', '<leader>gg', builtin.grep_string, {})
+ -- require"octo".setup{}
 EOF
 
-" augroup MyFormatAutogroup
-"   autocmd!
-"   autocmd BufWritePre *.go lua vim.lsp.buf.format()
-"   autocmd BufWritePre *.vue :EslintFixAll
-"   autocmd BufWritePre *.js :EslintFixAll
-"   autocmd BufWritePre *.ts :EslintFixAll
-" augroup end
+augroup MyFormatAutogroup
+  autocmd!
+  autocmd BufWritePre *.go lua vim.lsp.buf.format()
+  autocmd BufWritePre *.vue :EslintFixAll
+  autocmd BufWritePre *.js :EslintFixAll
+  autocmd BufWritePre *.ts :EslintFixAll
+augroup end
 
 let g:netrw_fastbrowse = 0
 
@@ -266,13 +275,7 @@ let g:dbs = {
 \ }
 
 set timeoutlen=700 ttimeoutlen=0
-colorscheme catppuccin_latte
+colorscheme carbonized-light
 
 :set splitright
-let g:airline_theme='catppuccin_latte'
-
-" external
-
-nnoremap <leader>ss :! task add 
-nnoremap <leader>si :! task add +in 
-nnoremap <leader>sl :! task next<CR>
+let g:airline_theme='minimalist'
