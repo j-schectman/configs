@@ -84,6 +84,8 @@ nnoremap <leader>bd :bd <CR>
 nnoremap <leader>ve :e $MYVIMRC <CR>
 nnoremap <leader>vs :source $MYVIMRC <CR>
 
+inoremap <C-l> <c-x><c-o>
+
 " Plugin Specific
 "
 " Vimwiki
@@ -91,7 +93,13 @@ let g:vimwiki_ext = '.md' " set extension to .md
 let g:vimwiki_global_ext = 0 " make sure it doesn't think it owns the world
 let g:vimwiki_markdown_link_ext=1
 let g:vimwiki_folding = 'expr'
-let g:vimwiki_tag_format = {'pre_mark': '@@', 'post_mark': '', 'sep': ''}
+let g:vimwiki_tag_format = {
+      \ 'pre_mark': '#', 
+      \ 'post_mark': '#', 
+      \ 'post': '\s\|$', 
+      \ 'sep': '#', 
+      \ 'pre': '^\|\s',
+      \}
 
 let g:vimwiki_list = [{
       \   'path': '/Users/jonaustin/git/vimwiki',
@@ -99,7 +107,8 @@ let g:vimwiki_list = [{
       \   'ext': '.md',
       \   'diary_rel_path' : '',
       \   'links_space_char': '_',
-      \   'auto_tags': 1
+      \   'auto_tags': 1,
+      \   'auto_generate_tags': 1,
       \ }]
 
 " No italics in terminal :sadface:
@@ -113,12 +122,6 @@ nnoremap <leader>tn :TestNearest<CR>
 nnoremap <leader>tf :TestFile<CR>
 nnoremap <leader>tl :TestLast<CR>
 nnoremap <leader>tt :TestLast<CR>
-
-
-" FZF
-" nnoremap <silent><nowait> <C-p> :GFiles <cr>
-" nnoremap <silent><nowait> <C-P> :Files <cr>
-" nnoremap <silent><nowait> <C-l> :Buffers <cr>
 
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
