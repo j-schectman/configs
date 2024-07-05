@@ -47,6 +47,7 @@ Plugin 'vim-test/vim-test'
 Plugin 'pwntester/octo.nvim'
 Plugin 'nvim-tree/nvim-web-devicons'
 Plugin 'nvim-lua/plenary.nvim'
+Plugin 'rust-lang/rust.vim'
 
 " Writing plugins
 Plugin 'vimwiki/vimwiki'
@@ -94,8 +95,8 @@ let g:vimwiki_global_ext = 0 " make sure it doesn't think it owns the world
 let g:vimwiki_markdown_link_ext=1
 let g:vimwiki_folding = 'expr'
 let g:vimwiki_tag_format = {
-      \ 'pre_mark': '#', 
-      \ 'post_mark': '#', 
+      \ 'pre_mark': '@', 
+      \ 'post_mark': ';', 
       \ 'post': '\s\|$', 
       \ 'sep': '#', 
       \ 'pre': '^\|\s',
