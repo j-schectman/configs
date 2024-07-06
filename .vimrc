@@ -119,7 +119,7 @@ endfunction
 
 augroup MyVimwikisAutogroup
   autocmd!
-  autocmd BufWritePost */vimwiki/*.md :call CommitChangeInWiki()
+  autocmd BufWritePost */git/vimwiki/*.md :call CommitChangeInWiki()
 augroup end
 
 " nnoremap <leader>up :call CommitChangeInWiki() <cr>
