@@ -98,7 +98,7 @@ let g:vimwiki_tag_format = {
       \ 'pre_mark': '@', 
       \ 'post_mark': ';', 
       \ 'post': '\s\|$', 
-      \ 'sep': '#', 
+      \ 'sep': '@', 
       \ 'pre': '^\|\s',
       \}
 
