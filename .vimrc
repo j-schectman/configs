@@ -111,6 +111,18 @@ let g:vimwiki_list = [{
       \   'auto_tags': 1,
       \   'auto_generate_tags': 1,
       \ }]
+" Backup on Git
+function CommitChangeInWiki()
+  execute "silent G commit -a -m 'did it'"
+  execute "silent G push"
+endfunction
+
+augroup MyVimwikisAutogroup
+  autocmd!
+  autocmd BufWritePost */vimwiki/*.md :call CommitChangeInWiki()
+augroup end
+
+" nnoremap <leader>up :call CommitChangeInWiki() <cr>
 
 " No italics in terminal :sadface:
 hi! link VimwikiItalic VimwikiBold
