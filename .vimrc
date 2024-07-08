@@ -122,6 +122,8 @@ augroup MyVimwikisAutogroup
   autocmd BufWritePost */git/vimwiki/*.md :call CommitChangeInWiki()
 augroup end
 
+nnoremap <leader>ft :lvimgrep  /- \[ \]/ ~/git/vimwiki/* <CR>
+
 " nnoremap <leader>up :call CommitChangeInWiki() <cr>
 
 " No italics in terminal :sadface:
