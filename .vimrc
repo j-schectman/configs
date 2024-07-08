@@ -123,6 +123,7 @@ augroup MyVimwikisAutogroup
 augroup end
 
 nnoremap <leader>ft :lvimgrep  /- \[ \]/ ~/git/vimwiki/* <CR>
+nnoremap <leader>fn :lvimgrep  /- \[ \].*@next;/ ~/git/vimwiki/* <CR>
 
 " nnoremap <leader>up :call CommitChangeInWiki() <cr>
 
